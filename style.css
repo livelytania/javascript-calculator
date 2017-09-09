@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
+
+/*--------------------------
+Global
+----------------------------*/
+
+* {
+    box-sizing: border-box;
+}
+
+body, h1, h2, h3, p, a {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.2;
+    margin: 0;
+}
+
+/*--------------------------
+Phone
+----------------------------*/
+
+.container {
+    margin: 20px auto;
+}
+
+/*--------------------------
+Layout
+----------------------------*/
+    
+.calc-container {
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 225px 50px 275px 83px 84px;
+    grid-template-areas:
+        "display display display display"
+        "breadcrumbs breadcrumbs breadcrumbs breadcrumbs"
+        "keypad keypad keypad keypad"
+        "operators operators operators operators"
+        "equals equals equals equals";
+    margin: 0 auto;
+    padding: 40px 12px 60px 12px;
+    width: 375px;
+}
+
+.display {
+    background-color: #68cef2;
+    grid-area: display;
+}
+
+.breadcrumbs {
+    align-items: center;
+    background-color: #4c4c4c;
+    display: flex;
+    grid-area: breadcrumbs;
+    justify-content: flex-end;
+    padding-right: 24px;
+}
+
+.keypad {
+    background-color: #fff;
+    display: grid;
+    grid-area: keypad;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+.operators {
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-area: operators;
+}
+
+.equals {
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-area: equals;
+}
+
+/*--------------------------
+Calculator
+----------------------------*/
+
+.result-container {
+    align-items: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.result {
+    color: #170808;
+    font-size: 92px;
+    margin: 0 24px 10px 0;
+}
+
+.keypad-button {
+    align-items: center;
+    border: 1px solid #f9f9f9;
+    color: #838383;
+    display: flex;
+    font-size: 22px;
+    justify-content: center;
+}
+
+.operator-button {
+    align-items: center;
+    align-self: center;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    font-size: 22px;
+    justify-content: center;
+    justify-self: center;
+    height: 40px;
+    width: 40px;
+}
+
+.divide {
+    background-color: #ca7cc8;
+}
+
+.minus {
+    background-color: #fdaf64;
+}
+
+.plus {
+    background-color: #fb96cf;
+}
+
+.times {
+    background-color: #69cdf2;
+}
+
+.equals-button {
+    align-items: center;
+    align-self: center;
+    border-radius: 8px;
+    display: flex;
+    font-size: 22px;
+    justify-content: center;
+    justify-self: center;
+    height: 50px;
+    width: 135px;
+}
+
+.back {
+    border: 2px solid #d9898e;
+    color: #d9898e;
+}
+
+.equal {
+    border: 2px solid #a4dbac;
+    color: #a4dbac;
+}
+
+.crumb-wrapper {
+    align-items: center;
+    border-radius: 12px;
+    color: #4c4c4c;
+    display: flex;
+    height: 24px;
+    margin: 0 8px 0 8px;
+    padding: 0 6px 0 6px;
+}
+
+.first-order {
+    background-color: #68cef2;
+}
+
+.second-order {
+    background-color: #fdaf64;
+}
+
+.crumb {
+    font-size: 12px;
+    font-weight: normal;
+    padding: 0 2px 0 2px;
+}
