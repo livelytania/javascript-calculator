@@ -50,7 +50,7 @@ Layout
     grid-area: display;
 }
 
-.breadcrumbs {
+#breadcrumbs {
     align-items: center;
     background-color: #4c4c4c;
     display: flex;
@@ -161,7 +161,7 @@ Calculator
 .crumb-wrapper {
     align-items: center;
     border-radius: 12px;
-    color: #4c4c4c;
+    color: #fff; /* #4c4c4c */
     display: flex;
     height: 24px;
     margin: 0 8px 0 8px;

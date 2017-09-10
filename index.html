@@ -23,7 +23,8 @@
                 <div class="display">
                     <div class="result-container"><p id="result"></p></div>
                 </div>
-                <div class="breadcrumbs">
+                <div id="breadcrumbs">
+<!--
                     <div class="crumb-wrapper first-order">
                         <div class="crumb">12</div>
                         <div class="crumb">&times;</div>
@@ -37,6 +38,7 @@
                         <div class="crumb">&times;</div>
                         <div class="crumb">2</div>
                     </div>
+-->
                 </div>
                 <div class="keypad">
                     <p class="button keypad-button" id="one">1</p>
@@ -70,6 +72,8 @@
         <script type="text/javascript">
             
             window.onload = function() {
+                
+                var id;
             
                 // variables and selectors
                 var result = document.getElementById("result"),
@@ -90,76 +94,99 @@
                     plus = document.getElementById("plus"),
                     times = document.getElementById("times"),
                     back = document.getElementById("clear"),
-                    evaluate = document.getElementById("evaluate");
+                    evaluate = document.getElementById("evaluate"),
+                    breadcrumbs = document.getElementById("breadcrumbs");
                 
                 // initialize expression
                 var expression = "";
                 
                 // update expression on click
                 one.onclick = function() {
+                    id = this.id;
                     console.log("1");
                     expression = expression + "1";
+                    addCrumb(id);
                 };
                 two.onclick = function() {
+                    id = this.id;
                     console.log("2");
                     expression = expression + "2";
                 };
                 three.onclick = function() {
+                    id = this.id;
                     console.log("3");
                     expression = expression + "3";
                 };
                 four.onclick = function() {
+                    id = this.id;
                     console.log("4");
                     expression = expression + "4";
                 };
                 five.onclick = function() {
+                    id = this.id;
                     console.log("5");
                     expression = expression + "5";
                 };
                 six.onclick = function() {
+                    id = this.id;
                     console.log("6");
                     expression = expression + "6";
                 };
                 seven.onclick = function() {
+                    id = this.id;
                     console.log("7");
                     expression = expression + "7";
                 };
                 eight.onclick = function() {
+                    id = this.id;
                     console.log("8");
                     expression = expression + "8";
                 };
                 nine.onclick = function() {
+                    id = this.id;
                     console.log("9");
                     expression = expression + "9";
                 };
                 percent.onclick = function() {
+                    id = this.id;
                     console.log("%");
                     expression = expression + "%";
                 };
                 zero.onclick = function() {
+                    id = this.id;
                     console.log("0");
                     expression = expression + "0";
                 };
                 period.onclick = function() {
+                    id = this.id;
                     console.log(".");
                     expression = expression + ".";
                 };
                 divide.onclick = function() {
+                    id = this.id;
                     console.log("/");
                     expression = expression + "/";
                 };
                 minus.onclick = function() {
+                    id = this.id;
                     console.log("-");
                     expression = expression + "-";
                 };
                 plus.onclick = function() {
+                    id = this.id;
                     console.log("+");
                     expression = expression + "+";
                 };
                 times.onclick = function() {
+                    id = this.id;
                     console.log("*");
                     expression = expression + "*";
                 };
+                
+                // breadcrumbs
+                function addCrumb(id) {
+                    breadcrumbs.innerHTML = "<div class='crumb-wrapper'><div class='crumb'>" + document.getElementById(id).innerHTML + "</div>";
+                }
                 
                 // evaluate expression
                 evaluate.onclick = function() {
