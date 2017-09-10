@@ -92,7 +92,7 @@ Calculator
     height: 100%;
 }
 
-.result {
+#result {
     color: #170808;
     font-size: 92px;
     margin: 0 24px 10px 0;
@@ -120,19 +120,19 @@ Calculator
     width: 40px;
 }
 
-.divide {
+#divide {
     background-color: #ca7cc8;
 }
 
-.minus {
+#minus {
     background-color: #fdaf64;
 }
 
-.plus {
+#plus {
     background-color: #fb96cf;
 }
 
-.times {
+#times {
     background-color: #69cdf2;
 }
 
@@ -148,12 +148,12 @@ Calculator
     width: 135px;
 }
 
-.back {
+#clear {
     border: 2px solid #d9898e;
     color: #d9898e;
 }
 
-.equal {
+#evaluate {
     border: 2px solid #a4dbac;
     color: #a4dbac;
 }

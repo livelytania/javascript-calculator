@@ -21,46 +21,36 @@
         <div class="container">
             <div class="calc-container">
                 <div class="display">
-                    <div class="result-container"><p class="result">26</p></div>
+                    <div class="result-container"><p id="result"></p></div>
                 </div>
                 <div class="breadcrumbs">
-                    <div class="crumb-wrapper first-order">
-                        <div class="crumb">12</div>
-                        <div class="crumb">&times;</div>
-                        <div class="crumb">3</div>
-                    </div>
-                    <div class="crumb-wrapper second-order">
-                        <div class="crumb">&minus;</div>
-                    </div>
-                    <div class="crumb-wrapper first-order">
-                        <div class="crumb">5</div>
-                        <div class="crumb">&times;</div>
-                        <div class="crumb">2</div>
+                    <div class="crumb-wrapper">
+                        <div class="crumb"></div>
                     </div>
                 </div>
                 <div class="keypad">
-                    <p class="button keypad-button one">1</p>
-                    <p class="button keypad-button two">2</p>
-                    <p class="button keypad-button three">3</p>
-                    <p class="button keypad-button four">4</p>
-                    <p class="button keypad-button five">5</p>
-                    <p class="button keypad-button six">6</p>
-                    <p class="button keypad-button seven">7</p>
-                    <p class="button keypad-button eight">8</p>
-                    <p class="button keypad-button nine">9</p>
-                    <p class="button keypad-button percent">&percnt;</p>
-                    <p class="button keypad-button zero">0</p>
-                    <p class="button keypad-button dot">&period;</p>
+                    <p class="button keypad-button" id="one">1</p>
+                    <p class="button keypad-button" id="two">2</p>
+                    <p class="button keypad-button" id="three">3</p>
+                    <p class="button keypad-button" id="four">4</p>
+                    <p class="button keypad-button" id="five">5</p>
+                    <p class="button keypad-button" id="six">6</p>
+                    <p class="button keypad-button" id="seven">7</p>
+                    <p class="button keypad-button" id="eight">8</p>
+                    <p class="button keypad-button" id="nine">9</p>
+                    <p class="button keypad-button" id="percent">&percnt;</p>
+                    <p class="button keypad-button" id="zero">0</p>
+                    <p class="button keypad-button" id="period">&period;</p>
                 </div>
                 <div class="operators">
-                    <p class="button operator-button divide">&div;</p>
-                    <p class="button operator-button minus">&minus;</p>
-                    <p class="button operator-button plus">&plus;</p>
-                    <p class="button operator-button times">&times;</p>
+                    <p class="button operator-button" id="divide">&div;</p>
+                    <p class="button operator-button" id="minus">&minus;</p>
+                    <p class="button operator-button" id="plus">&plus;</p>
+                    <p class="button operator-button" id="times">&times;</p>
                 </div>
                 <div class="equals">
-                    <p class="button equals-button back">&lt;&lt;</p>
-                    <p class="button equals-button equal">&equals;</p>
+                    <p class="button equals-button" id="clear">Clear</p>
+                    <p class="button equals-button" id="evaluate">&equals;</p>
                 </div>
             </div>
         </div>
@@ -69,7 +59,113 @@
         
         <script type="text/javascript">
             
+            window.onload = function() {
             
+                // variables and selectors
+                var result = document.getElementById("result"),
+                    one = document.getElementById("one"),
+                    two = document.getElementById("two"),
+                    three = document.getElementById("three"),
+                    four = document.getElementById("four"),
+                    five = document.getElementById("five"),
+                    six = document.getElementById("six"),
+                    seven = document.getElementById("seven"),
+                    eight = document.getElementById("eight"),
+                    nine = document.getElementById("nine"),
+                    percent = document.getElementById("percent"),
+                    zero = document.getElementById("zero"),
+                    period = document.getElementById("period"),
+                    divide = document.getElementById("divide"),
+                    minus = document.getElementById("minus"),
+                    plus = document.getElementById("plus"),
+                    times = document.getElementById("times"),
+                    back = document.getElementById("clear"),
+                    evaluate = document.getElementById("evaluate");
+                
+                // initialize expression
+                var expression = "";
+                
+                // update expression on click
+                one.onclick = function() {
+                    console.log("1");
+                    expression = expression + "1";
+                };
+                two.onclick = function() {
+                    console.log("2");
+                    expression = expression + "2";
+                };
+                three.onclick = function() {
+                    console.log("3");
+                    expression = expression + "3";
+                };
+                four.onclick = function() {
+                    console.log("4");
+                    expression = expression + "4";
+                };
+                five.onclick = function() {
+                    console.log("5");
+                    expression = expression + "5";
+                };
+                six.onclick = function() {
+                    console.log("6");
+                    expression = expression + "6";
+                };
+                seven.onclick = function() {
+                    console.log("7");
+                    expression = expression + "7";
+                };
+                eight.onclick = function() {
+                    console.log("8");
+                    expression = expression + "8";
+                };
+                nine.onclick = function() {
+                    console.log("9");
+                    expression = expression + "9";
+                };
+                percent.onclick = function() {
+                    console.log("%");
+                    expression = expression + "%";
+                };
+                zero.onclick = function() {
+                    console.log("0");
+                    expression = expression + "0";
+                };
+                period.onclick = function() {
+                    console.log(".");
+                    expression = expression + ".";
+                };
+                divide.onclick = function() {
+                    console.log("/");
+                    expression = expression + "/";
+                };
+                minus.onclick = function() {
+                    console.log("-");
+                    expression = expression + "-";
+                };
+                plus.onclick = function() {
+                    console.log("+");
+                    expression = expression + "+";
+                };
+                times.onclick = function() {
+                    console.log("*");
+                    expression = expression + "*";
+                };
+                
+                // evaluate expression
+                evaluate.onclick = function() {
+                    console.log("evaluate");
+                    console.log(expression);
+                    result.innerHTML = (eval(expression));
+                };
+                
+                // clear results
+                clear.onclick = function() {
+                    console.log("clear");
+                    expression = "";
+                    result.innerHTML = "";
+                }
+
+            }
             
         </script>
         
