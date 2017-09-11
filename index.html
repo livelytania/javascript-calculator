@@ -21,7 +21,7 @@
         <div class="container">
             <div class="calc-container">
                 <div class="display">
-                    <div class="result-container"><p class="result"></p></div>
+                    <div class="result-container"><p class="result">0</p></div>
                 </div>
                 <div class="breadcrumbs">
                     <div class="crumb-wrapper crumb-wrapper-0">
@@ -42,10 +42,10 @@
                     <p class="button keypad-button period">&period;</p>
                 </div>
                 <div class="operators">
-                    <p class="button operator-button divide">&div;</p>
+                    <p class="button operator-button divide" id="/">&div;</p>
                     <p class="button operator-button minus">&minus;</p>
                     <p class="button operator-button plus">&plus;</p>
-                    <p class="button operator-button times">&times;</p>
+                    <p class="button operator-button times" id="*">&times;</p>
                 </div>
                 <div class="back-eval">
                     <p class="button back-eval-button back">&lt; Back</p>
@@ -58,14 +58,29 @@
         
         <script type="text/javascript">
             
-            window.onload = function() {
+            // initialize variables
+            var equalClicks = 0; // keep track of number of "=" clicks
+            var expression = ""; // initialize expression
+            var breadcrumb = ""; // initialize breadcrumb
+            var resultLog = [""]; // keep track of result
+            
+            // function to add breadcrumbs
+            function addCrumb() {
+                $(".crumb-wrapper-" + equalClicks).css("display", "flex");
+                console.log("add breadcrumb: " + breadcrumb);
+                var html = "";
+                for (i=0; i<breadcrumb.length; i++) {
+                    html = html + "<div class='crumb'>" + breadcrumb[i] + "</div>"
+                }
+                console.log(html);
+                $(".crumb-wrapper-" + equalClicks).html(html);
+            }
+            
+            // Main script
+            
+            $(document).ready(function() {
                 
-                var id;
-                var equalClicks = 0;
                 console.log("Equal button clicks: " + equalClicks);
-                
-                var expression = ""; // initialize expression
-                var breadcrumb = ""; // initialize breadcrumb
                 
                 // update expression on click
                 $(".one").click(function() {
@@ -141,9 +156,9 @@
                     addCrumb();
                 });
                 $(".divide").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression = expression + event.target.id;
+                    breadcrumb = breadcrumb + event.target.id;
                     addCrumb();
                 });
                 $(".minus").click(function() {
@@ -159,47 +174,39 @@
                     addCrumb();
                 });
                 $(".times").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression = expression + event.target.id;
+                    breadcrumb = breadcrumb + event.target.id;
                     addCrumb();
                 });
                 
-                // add breadcrumbs
-                function addCrumb() {
-                    $(".crumb-wrapper-" + equalClicks).css("display", "flex");
-                    console.log("add breadcrumb: " + breadcrumb);
-                    var html = "";
-                    for (i=0; i<breadcrumb.length; i++) {
-                        html = html + "<div class='crumb'>" + breadcrumb[i] + "</div>"
-                    }
-                    console.log(html);
-                    $(".crumb-wrapper-" + equalClicks).html(html);
-                }
-                
-                function evaluate(str) {
-                    try {
-                        return eval(str);
-                    } catch (e) {
-                        if (e instanceof SyntaxError) {
-                            alert(e.message);
-                            $(".result").empty().html("error");
-                        }
-                    }
-                }
-                
                 // evaluate expression
                 $(".evaluate").click(function() {
-                    console.log("evaluate");
-                    console.log(expression);
+                    
+                    var newResult = "";
+                    var lastResult = resultLog[resultLog.length-1];
+                    
+                    // evaluate the expression and display it
+                    console.log("Evaluating...");
+                    console.log(" last result: " + lastResult);
+                    console.log(" new expression: " + expression);
+                    console.log(" combine: " + lastResult + expression);
+                    
+                    newResult = eval(lastResult + expression);
+                    $(".result").empty().html(newResult);
+                    
+                    console.log("RESULT: " + newResult);
+                    
+                    // reset variables
+                    expression = "";
+                    breadcrumb = "";
+                    
+                    // add current result to resultLog array
+                    resultLog.push(newResult);
                     
                     // increment the number of equal clicks by one
                     equalClicks++;
                     console.log("Equal button clicks: " + equalClicks);
-                    
-                    // evaluate the expression and display it
-                    $(".result").empty().html(evaluate(expression));
-                    breadcrumb = ""; // reset breadcrumb
                     
                     // add new breadcrumb div to accept the next breadcrumb
                     $(".breadcrumbs").append("<div class='crumb-wrapper crumb-wrapper-" + equalClicks + "'></div>"); 
@@ -222,16 +229,13 @@
                     // remove the most recent breadcrumb
                     $(".crumb-wrapper-" + equalClicks).remove();
                     
-                    // reset the expression
-                    var lastExpression = [];
-                    $('.crumb').each(function() {
-                       lastExpression.push($(this).text());
-                    });
-                    expression = lastExpression.join("");
+                    // revert to previous result and display it
+                    resultLog.pop();
+                    var resetResult = resultLog[resultLog.length-1];
+                    $(".result").empty().html(resetResult);
                     
-                    // evaluate the expression and display it
-                    $(".result").empty().html(evaluate(expression));
-                    breadcrumb = ""; // reset breadcrumb
+                    // reset breadcrumb
+                    breadcrumb = "";
                     
                     // add new breadcrumb div to accept the next breadcrumb
                     $(".breadcrumbs").append("<div class='crumb-wrapper crumb-wrapper-" + equalClicks + "'></div>"); 
@@ -239,11 +243,11 @@
                     
                     console.log("You have moved back one step");
                     console.log("Equal clicks have been reset to " + equalClicks);
-                    console.log("The expression to be evaluated has been reset to: " + lastExpression);
+                    console.log("The result has been reset to: " + resetResult);
                     
                 });
 
-            }
+            });
             
         </script>
         
