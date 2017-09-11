@@ -101,6 +101,7 @@ Calculator
 .result {
     color: #170808;
     font-size: 92px;
+    height: 120px;
     margin: 0 24px 10px 0;
     overflow: hidden;
     white-space: nowrap;

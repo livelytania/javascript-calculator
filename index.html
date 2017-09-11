@@ -37,14 +37,14 @@
                     <p class="button keypad-button seven">7</p>
                     <p class="button keypad-button eight">8</p>
                     <p class="button keypad-button nine">9</p>
-                    <p class="button keypad-button percent">&percnt;</p>
+                    <p class="button keypad-button percent" id="%">&percnt;</p>
                     <p class="button keypad-button zero">0</p>
                     <p class="button keypad-button period">&period;</p>
                 </div>
                 <div class="operators">
                     <p class="button operator-button divide" id="/">&div;</p>
-                    <p class="button operator-button minus">&minus;</p>
-                    <p class="button operator-button plus">&plus;</p>
+                    <p class="button operator-button minus" id="-">&minus;</p>
+                    <p class="button operator-button plus" id="+">&plus;</p>
                     <p class="button operator-button times" id="*">&times;</p>
                 </div>
                 <div class="back-eval">
@@ -138,9 +138,9 @@
                     addCrumb();
                 });
                 $(".percent").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression = expression + event.target.id;
+                    breadcrumb = breadcrumb + event.target.id;
                     addCrumb();
                 });
                 $(".zero").click(function() {
@@ -150,9 +150,9 @@
                     addCrumb();
                 });
                 $(".period").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression = expression + event.target.id;
+                    breadcrumb = breadcrumb + event.target.id;
                     addCrumb();
                 });
                 $(".divide").click(function() {
@@ -162,15 +162,15 @@
                     addCrumb();
                 });
                 $(".minus").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression = expression + event.target.id;
+                    breadcrumb = breadcrumb + event.target.id;
                     addCrumb();
                 });
                 $(".plus").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression = expression + event.target.id;
+                    breadcrumb = breadcrumb + event.target.id;
                     addCrumb();
                 });
                 $(".times").click(function() {
@@ -181,69 +181,83 @@
                 });
                 
                 // evaluate expression
-                $(".evaluate").click(function() {
-                    
-                    var newResult = "";
-                    var lastResult = resultLog[resultLog.length-1];
-                    
-                    // evaluate the expression and display it
-                    console.log("Evaluating...");
-                    console.log(" last result: " + lastResult);
-                    console.log(" new expression: " + expression);
-                    console.log(" combine: " + lastResult + expression);
-                    
-                    newResult = eval(lastResult + expression);
-                    $(".result").empty().html(newResult);
-                    
-                    console.log("RESULT: " + newResult);
-                    
-                    // reset variables
-                    expression = "";
-                    breadcrumb = "";
-                    
-                    // add current result to resultLog array
-                    resultLog.push(newResult);
-                    
-                    // increment the number of equal clicks by one
-                    equalClicks++;
-                    console.log("Equal button clicks: " + equalClicks);
-                    
-                    // add new breadcrumb div to accept the next breadcrumb
-                    $(".breadcrumbs").append("<div class='crumb-wrapper crumb-wrapper-" + equalClicks + "'></div>"); 
-                    $(".crumb-wrapper-" + equalClicks).css({"display":"none", "background-color":"#68cef2"});
+                $(".evaluate").click(function(e) {
+
+                    if (expression) { // equal button does nothing if no buttons have been clicked
+                                
+                        var newResult = "";
+                        var lastResult = resultLog[resultLog.length-1];
+
+                        // evaluate the expression and display it
+                        console.log("Evaluating...");
+                        console.log(" last result: " + lastResult);
+                        console.log(" new expression: " + expression);
+                        console.log(" combine: " + lastResult + expression);
+
+                        newResult = eval(lastResult + expression);
+
+                        $(".result").empty().html(newResult);
+
+                        console.log("RESULT: " + newResult);
+
+                        // reset variables
+                        expression = "";
+                        breadcrumb = "";
+
+                        // add current result to resultLog array
+                        resultLog.push(newResult);
+
+                        // increment the number of equal clicks by one
+                        equalClicks++;
+                        console.log("Equal button clicks: " + equalClicks);
+
+                        // add new breadcrumb div to accept the next breadcrumb
+                        $(".breadcrumbs").append("<div class='crumb-wrapper crumb-wrapper-" + equalClicks + "'></div>"); 
+                        $(".crumb-wrapper-" + equalClicks).css({"display":"none", "background-color":"#68cef2"});
+                    }
                 });
                 
                 // go back
                 $(".back").click(function() {
                     
-                    // if equal was clicked before going back, remove the blank div added by clicking on equal
-                    if ($(".crumb-wrapper-" + equalClicks).text() == "") {
-                        // remove most recent breadcrumb
+                    if (equalClicks > 0) {
+                    
+                        // if equal was clicked before going back, remove the blank div added by clicking on equal
+                        if ($(".crumb-wrapper-" + equalClicks).text() == "") {
+                            // remove most recent breadcrumb
+                            $(".crumb-wrapper-" + equalClicks).remove();
+                            // decrement the number of equal clicks by 1
+                            equalClicks--;
+                        }
+
+                        console.log($(".crumb-wrapper-" + equalClicks));
+
+                        // remove the most recent breadcrumb
                         $(".crumb-wrapper-" + equalClicks).remove();
-                        // decrement the number of equal clicks by 1
-                        equalClicks--;
+
+                        // revert to previous result and display it
+                        resultLog.pop(); // remove last result from array
+                        if (resultLog == "") { // check if array is empty
+                            // display 0
+                            $(".result").empty().html(0);
+                        } else {
+                            // display last result
+                            var resetResult = resultLog[resultLog.length-1];
+                            $(".result").empty().html(resetResult);
+                        }
+
+                        // reset breadcrumb
+                        breadcrumb = "";
+
+                        // add new breadcrumb div to accept the next breadcrumb
+                        $(".breadcrumbs").append("<div class='crumb-wrapper crumb-wrapper-" + equalClicks + "'></div>"); 
+                        $(".crumb-wrapper-" + equalClicks).css({"display":"none", "background-color":"#68cef2"});
+
+                        console.log("You have moved back one step");
+                        console.log("Equal clicks have been reset to " + equalClicks);
+                        console.log("The result has been reset to: " + resetResult);
+                
                     }
-                    
-                    console.log($(".crumb-wrapper-" + equalClicks));
-                    
-                    // remove the most recent breadcrumb
-                    $(".crumb-wrapper-" + equalClicks).remove();
-                    
-                    // revert to previous result and display it
-                    resultLog.pop();
-                    var resetResult = resultLog[resultLog.length-1];
-                    $(".result").empty().html(resetResult);
-                    
-                    // reset breadcrumb
-                    breadcrumb = "";
-                    
-                    // add new breadcrumb div to accept the next breadcrumb
-                    $(".breadcrumbs").append("<div class='crumb-wrapper crumb-wrapper-" + equalClicks + "'></div>"); 
-                    $(".crumb-wrapper-" + equalClicks).css({"display":"none", "background-color":"#68cef2"});
-                    
-                    console.log("You have moved back one step");
-                    console.log("Equal clicks have been reset to " + equalClicks);
-                    console.log("The result has been reset to: " + resetResult);
                     
                 });
 
