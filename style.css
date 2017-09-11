@@ -16,7 +16,7 @@ body, h1, h2, h3, p, a {
     margin: 0;
 }
 
-a, p.button {
+a, p {
     cursor: pointer;
 }
 
@@ -171,7 +171,7 @@ Calculator
     background-color: #69cdf2;
 }
 
-.back-eval-button {
+.back, .eval {
     align-items: center;
     align-self: center;
     border-radius: 8px;
@@ -188,7 +188,7 @@ Calculator
     color: #d9898e;
 }
 
-.evaluate {
+.eval {
     border: 2px solid #a4dbac;
     color: #a4dbac;
 }
