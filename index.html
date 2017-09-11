@@ -47,9 +47,9 @@
                     <p class="button operator-button plus">&plus;</p>
                     <p class="button operator-button times">&times;</p>
                 </div>
-                <div class="clear-eval">
-                    <p class="button clear-eval-button clear">Clear</p>
-                    <p class="button clear-eval-button evaluate">&equals;</p>
+                <div class="back-eval">
+                    <p class="button back-eval-button back">&lt; Back</p>
+                    <p class="button back-eval-button evaluate">&equals;</p>
                 </div>
             </div>
         </div>
@@ -64,121 +64,183 @@
                 var equalClicks = 0;
                 console.log("Equal button clicks: " + equalClicks);
                 
-                // initialize expression
-                var expression = "";
-                var breadcrumb = [];
+                var expression = ""; // initialize expression
+                var breadcrumb = ""; // initialize breadcrumb
                 
                 // update expression on click
                 $(".one").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".two").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".three").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".four").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".five").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".six").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".seven").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".eight").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".nine").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".percent").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".zero").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".period").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".divide").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".minus").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".plus").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 $(".times").click(function() {
                     console.log($(this).text());
                     expression = expression + $(this).text();
+                    breadcrumb = breadcrumb + $(this).text();
                     addCrumb();
                 });
                 
                 // add breadcrumbs
                 function addCrumb() {
-                    var breadcrumbs = expression.split("");
-                    console.log("addCrumb");
-                    console.log(breadcrumbs);
+                    $(".crumb-wrapper-" + equalClicks).css("display", "flex");
+                    console.log("add breadcrumb: " + breadcrumb);
                     var html = "";
-                    for (i=0; i<breadcrumbs.length; i++) {
-                        html = html + "<div class='crumb'>" + breadcrumbs[i] + "</div>"
+                    for (i=0; i<breadcrumb.length; i++) {
+                        html = html + "<div class='crumb'>" + breadcrumb[i] + "</div>"
                     }
                     console.log(html);
                     $(".crumb-wrapper-" + equalClicks).html(html);
+                }
+                
+                function evaluate(str) {
+                    try {
+                        return eval(str);
+                    } catch (e) {
+                        if (e instanceof SyntaxError) {
+                            alert(e.message);
+                            $(".result").empty().html("error");
+                        }
+                    }
                 }
                 
                 // evaluate expression
                 $(".evaluate").click(function() {
                     console.log("evaluate");
                     console.log(expression);
-                    equalClicks++; // keep track of number of equal clicks
+                    
+                    // increment the number of equal clicks by one
+                    equalClicks++;
                     console.log("Equal button clicks: " + equalClicks);
-                    $(".result").html(eval(expression));
-                    $(".breadcrumbs").append("<div class='crumb-wrapper block-a'></div>");
+                    
+                    // evaluate the expression and display it
+                    $(".result").empty().html(evaluate(expression));
+                    breadcrumb = ""; // reset breadcrumb
+                    
+                    // add new breadcrumb div to accept the next breadcrumb
+                    $(".breadcrumbs").append("<div class='crumb-wrapper crumb-wrapper-" + equalClicks + "'></div>"); 
+                    $(".crumb-wrapper-" + equalClicks).css({"display":"none", "background-color":"#68cef2"});
                 });
                 
-                // clear results
-                $(".clear").click(function() {
-                    console.log("clear");
-                    expression = "";
-                    $(".result").html("");
-                    $(".crumb-wrapper").html("").css("display","none");
+                // go back
+                $(".back").click(function() {
+                    
+                    // if equal was clicked before going back, remove the blank div added by clicking on equal
+                    if ($(".crumb-wrapper-" + equalClicks).text() == "") {
+                        // remove most recent breadcrumb
+                        $(".crumb-wrapper-" + equalClicks).remove();
+                        // decrement the number of equal clicks by 1
+                        equalClicks--;
+                    }
+                    
+                    console.log($(".crumb-wrapper-" + equalClicks));
+                    
+                    // remove the most recent breadcrumb
+                    $(".crumb-wrapper-" + equalClicks).remove();
+                    
+                    // reset the expression
+                    var lastExpression = [];
+                    $('.crumb').each(function() {
+                       lastExpression.push($(this).text());
+                    });
+                    expression = lastExpression.join("");
+                    
+                    // evaluate the expression and display it
+                    $(".result").empty().html(evaluate(expression));
+                    breadcrumb = ""; // reset breadcrumb
+                    
+                    // add new breadcrumb div to accept the next breadcrumb
+                    $(".breadcrumbs").append("<div class='crumb-wrapper crumb-wrapper-" + equalClicks + "'></div>"); 
+                    $(".crumb-wrapper-" + equalClicks).css({"display":"none", "background-color":"#68cef2"});
+                    
+                    console.log("You have moved back one step");
+                    console.log("Equal clicks have been reset to " + equalClicks);
+                    console.log("The expression to be evaluated has been reset to: " + lastExpression);
+                    
                 });
 
             }
