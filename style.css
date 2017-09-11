@@ -43,7 +43,7 @@ Layout
         "breadcrumbs breadcrumbs breadcrumbs breadcrumbs"
         "keypad keypad keypad keypad"
         "operators operators operators operators"
-        "equals equals equals equals";
+        "clear-eval clear-eval clear-eval clear-eval";
     margin: 0 auto;
     padding: 40px 12px 60px 12px;
     width: 375px;
@@ -54,7 +54,7 @@ Layout
     grid-area: display;
 }
 
-#breadcrumbs {
+.breadcrumbs {
     align-items: center;
     background-color: #4c4c4c;
     display: flex;
@@ -78,11 +78,11 @@ Layout
     grid-area: operators;
 }
 
-.equals {
+.clear-eval {
     background-color: #fff;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-area: equals;
+    grid-area: clear-eval;
 }
 
 /*--------------------------
@@ -98,7 +98,7 @@ Calculator
     height: 100%;
 }
 
-#result {
+.result {
     color: #170808;
     font-size: 92px;
     margin: 0 24px 10px 0;
@@ -118,11 +118,19 @@ Calculator
     padding: 0 6px 0 6px;
 }
 
-.first-order {
+.crumb-wrapper-0 {
     background-color: #68cef2;
 }
 
-.second-order {
+.crumb-wrapper-1 {
+    background-color: #fdaf64;
+}
+
+.crumb-wrapper-2 {
+    background-color: #68cef2;
+}
+
+.crumb-wrapper-3 {
     background-color: #fdaf64;
 }
 
@@ -158,23 +166,23 @@ Calculator
     width: 40px;
 }
 
-#divide {
+.divide {
     background-color: #ca7cc8;
 }
 
-#minus {
+.minus {
     background-color: #fdaf64;
 }
 
-#plus {
+.plus {
     background-color: #fb96cf;
 }
 
-#times {
+.times {
     background-color: #69cdf2;
 }
 
-.equals-button {
+.clear-eval-button {
     align-items: center;
     align-self: center;
     border-radius: 8px;
@@ -186,12 +194,12 @@ Calculator
     width: 135px;
 }
 
-#clear {
+.clear {
     border: 2px solid #d9898e;
     color: #d9898e;
 }
 
-#evaluate {
+.evaluate {
     border: 2px solid #a4dbac;
     color: #a4dbac;
 }

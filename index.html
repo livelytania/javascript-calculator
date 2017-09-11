@@ -21,48 +21,35 @@
         <div class="container">
             <div class="calc-container">
                 <div class="display">
-                    <div class="result-container"><p id="result"></p></div>
+                    <div class="result-container"><p class="result"></p></div>
                 </div>
-                <div id="breadcrumbs">
-<!--
-                    <div class="crumb-wrapper first-order">
-                        <div class="crumb">12</div>
-                        <div class="crumb">&times;</div>
-                        <div class="crumb">3</div>
+                <div class="breadcrumbs">
+                    <div class="crumb-wrapper crumb-wrapper-0">
                     </div>
-                    <div class="crumb-wrapper second-order">
-                        <div class="crumb">&minus;</div>
-                    </div>
-                    <div class="crumb-wrapper first-order">
-                        <div class="crumb">5</div>
-                        <div class="crumb">&times;</div>
-                        <div class="crumb">2</div>
-                    </div>
--->
                 </div>
                 <div class="keypad">
-                    <p class="button keypad-button" id="one">1</p>
-                    <p class="button keypad-button" id="two">2</p>
-                    <p class="button keypad-button" id="three">3</p>
-                    <p class="button keypad-button" id="four">4</p>
-                    <p class="button keypad-button" id="five">5</p>
-                    <p class="button keypad-button" id="six">6</p>
-                    <p class="button keypad-button" id="seven">7</p>
-                    <p class="button keypad-button" id="eight">8</p>
-                    <p class="button keypad-button" id="nine">9</p>
-                    <p class="button keypad-button" id="percent">&percnt;</p>
-                    <p class="button keypad-button" id="zero">0</p>
-                    <p class="button keypad-button" id="period">&period;</p>
+                    <p class="button keypad-button one">1</p>
+                    <p class="button keypad-button two">2</p>
+                    <p class="button keypad-button three">3</p>
+                    <p class="button keypad-button four">4</p>
+                    <p class="button keypad-button five">5</p>
+                    <p class="button keypad-button six">6</p>
+                    <p class="button keypad-button seven">7</p>
+                    <p class="button keypad-button eight">8</p>
+                    <p class="button keypad-button nine">9</p>
+                    <p class="button keypad-button percent">&percnt;</p>
+                    <p class="button keypad-button zero">0</p>
+                    <p class="button keypad-button period">&period;</p>
                 </div>
                 <div class="operators">
-                    <p class="button operator-button" id="divide">&div;</p>
-                    <p class="button operator-button" id="minus">&minus;</p>
-                    <p class="button operator-button" id="plus">&plus;</p>
-                    <p class="button operator-button" id="times">&times;</p>
+                    <p class="button operator-button divide">&div;</p>
+                    <p class="button operator-button minus">&minus;</p>
+                    <p class="button operator-button plus">&plus;</p>
+                    <p class="button operator-button times">&times;</p>
                 </div>
-                <div class="equals">
-                    <p class="button equals-button" id="clear">Clear</p>
-                    <p class="button equals-button" id="evaluate">&equals;</p>
+                <div class="clear-eval">
+                    <p class="button clear-eval-button clear">Clear</p>
+                    <p class="button clear-eval-button evaluate">&equals;</p>
                 </div>
             </div>
         </div>
@@ -74,148 +61,97 @@
             window.onload = function() {
                 
                 var id;
-            
-                // variables and selectors
-                var result = document.getElementById("result"),
-                    one = document.getElementById("one"),
-                    two = document.getElementById("two"),
-                    three = document.getElementById("three"),
-                    four = document.getElementById("four"),
-                    five = document.getElementById("five"),
-                    six = document.getElementById("six"),
-                    seven = document.getElementById("seven"),
-                    eight = document.getElementById("eight"),
-                    nine = document.getElementById("nine"),
-                    percent = document.getElementById("percent"),
-                    zero = document.getElementById("zero"),
-                    period = document.getElementById("period"),
-                    divide = document.getElementById("divide"),
-                    minus = document.getElementById("minus"),
-                    plus = document.getElementById("plus"),
-                    times = document.getElementById("times"),
-                    back = document.getElementById("clear"),
-                    evaluate = document.getElementById("evaluate"),
-                    breadcrumbsEl = document.getElementById("breadcrumbs");
+                var equalClicks = 0;
+                console.log("Equal button clicks: " + equalClicks);
                 
                 // initialize expression
                 var expression = "";
+                var breadcrumb = [];
                 
                 // update expression on click
-                one.onclick = function() {
-                    id = this.id;
-                    console.log("1");
-                    expression = expression + "1";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                two.onclick = function() {
-                    id = this.id;
-                    console.log("2");
-                    expression = expression + "2";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                three.onclick = function() {
-                    id = this.id;
-                    console.log("3");
-                    expression = expression + "3";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                four.onclick = function() {
-                    id = this.id;
-                    console.log("4");
-                    expression = expression + "4";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                five.onclick = function() {
-                    id = this.id;
-                    console.log("5");
-                    expression = expression + "5";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                six.onclick = function() {
-                    id = this.id;
-                    console.log("6");
-                    expression = expression + "6";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                seven.onclick = function() {
-                    id = this.id;
-                    console.log("7");
-                    expression = expression + "7";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                eight.onclick = function() {
-                    id = this.id;
-                    console.log("8");
-                    expression = expression + "8";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                nine.onclick = function() {
-                    id = this.id;
-                    console.log("9");
-                    expression = expression + "9";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                percent.onclick = function() {
-                    id = this.id;
-                    console.log("%");
-                    expression = expression + "%";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                zero.onclick = function() {
-                    id = this.id;
-                    console.log("0");
-                    expression = expression + "0";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                period.onclick = function() {
-                    id = this.id;
-                    console.log(".");
-                    expression = expression + ".";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                divide.onclick = function() {
-                    id = this.id;
-                    console.log("/");
-                    expression = expression + "/";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                minus.onclick = function() {
-                    id = this.id;
-                    console.log("-");
-                    expression = expression + "-";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                plus.onclick = function() {
-                    id = this.id;
-                    console.log("+");
-                    expression = expression + "+";
-                    addCrumb(id);
-                    styleCrumb();
-                };
-                times.onclick = function() {
-                    id = this.id;
-                    console.log("*");
-                    expression = expression + "*";
-                    addCrumb(id);
-                    styleCrumb();
-                };
+                $(".one").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".two").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".three").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".four").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".five").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".six").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".seven").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".eight").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".nine").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".percent").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".zero").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".period").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".divide").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".minus").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".plus").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
+                $(".times").click(function() {
+                    console.log($(this).text());
+                    expression = expression + $(this).text();
+                    addCrumb();
+                });
                 
                 // add breadcrumbs
-                function addCrumb(id) {
+                function addCrumb() {
                     var breadcrumbs = expression.split("");
                     console.log("addCrumb");
                     console.log(breadcrumbs);
@@ -224,30 +160,26 @@
                         html = html + "<div class='crumb'>" + breadcrumbs[i] + "</div>"
                     }
                     console.log(html);
-                    breadcrumbsEl.innerHTML = html;
-                }
-                
-                // style breadcrumbs
-                function styleCrumb() {
-                    if (expression.length <= 3) {
-                        $(".crumb").wrapAll("<div class='crumb-wrapper first-order'></div>");
-                    }
+                    $(".crumb-wrapper-" + equalClicks).html(html);
                 }
                 
                 // evaluate expression
-                evaluate.onclick = function() {
+                $(".evaluate").click(function() {
                     console.log("evaluate");
                     console.log(expression);
-                    result.innerHTML = (eval(expression));
-                };
+                    equalClicks++; // keep track of number of equal clicks
+                    console.log("Equal button clicks: " + equalClicks);
+                    $(".result").html(eval(expression));
+                    $(".breadcrumbs").append("<div class='crumb-wrapper block-a'></div>");
+                });
                 
                 // clear results
-                clear.onclick = function() {
+                $(".clear").click(function() {
                     console.log("clear");
                     expression = "";
-                    result.innerHTML = "";
-                    breadcrumbsEl.innerHTML = "";
-                }
+                    $(".result").html("");
+                    $(".crumb-wrapper").html("").css("display","none");
+                });
 
             }
             
