@@ -28,18 +28,18 @@
                     </div>
                 </div>
                 <div class="keypad">
-                    <p class="button keypad-button one">1</p>
-                    <p class="button keypad-button two">2</p>
-                    <p class="button keypad-button three">3</p>
-                    <p class="button keypad-button four">4</p>
-                    <p class="button keypad-button five">5</p>
-                    <p class="button keypad-button six">6</p>
-                    <p class="button keypad-button seven">7</p>
-                    <p class="button keypad-button eight">8</p>
-                    <p class="button keypad-button nine">9</p>
-                    <p class="button keypad-button percent" id="%">&percnt;</p>
-                    <p class="button keypad-button zero">0</p>
-                    <p class="button keypad-button period">&period;</p>
+                    <p class="button keypad-button one" id="1">1</p>
+                    <p class="button keypad-button two" id="2">2</p>
+                    <p class="button keypad-button three" id="3">3</p>
+                    <p class="button keypad-button four" id="4">4</p>
+                    <p class="button keypad-button five" id="5">5</p>
+                    <p class="button keypad-button six" id="6">6</p>
+                    <p class="button keypad-button seven" id="7">7</p>
+                    <p class="button keypad-button eight" id="8">8</p>
+                    <p class="button keypad-button nine" id="9">9</p>
+                    <p class="button keypad-button neg" id="-">&mnplus;</p>
+                    <p class="button keypad-button zero" id="0">0</p>
+                    <p class="button keypad-button period" id=".">&period;</p>
                 </div>
                 <div class="operators">
                     <p class="button operator-button divide" id="/">&div;</p>
@@ -48,8 +48,8 @@
                     <p class="button operator-button times" id="*">&times;</p>
                 </div>
                 <div class="back-eval">
-                    <p class="button back-eval-button back">&lt; Back</p>
-                    <p class="button back-eval-button evaluate">&equals;</p>
+                    <p class="button back-eval-button back" id="back">&lt; Back</p>
+                    <p class="button back-eval-button evaluate" id="=">&equals;</p>
                 </div>
             </div>
         </div>
@@ -63,6 +63,7 @@
             var expression = ""; // initialize expression
             var breadcrumb = ""; // initialize breadcrumb
             var resultLog = [""]; // keep track of result
+            var keysPressed = ""; // keep track of keys pressed
             
             // function to add breadcrumbs
             function addCrumb() {
@@ -76,6 +77,13 @@
                 $(".crumb-wrapper-" + equalClicks).html(html);
             }
             
+            // last item
+            function lastThing(keysPressed) {
+                var re = /[\/\+\-\*]/;
+                var array = keysPressed.split(re);
+                console.log(array);
+            }
+            
             // Main script
             
             $(document).ready(function() {
@@ -84,105 +92,131 @@
                 
                 // update expression on click
                 $(".one").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression += event.target.id;
+                    breadcrumb += event.target.id;
+                    keysPressed += event.target.id;
                     addCrumb();
                 });
                 $(".two").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression += event.target.id;
+                    breadcrumb += event.target.id;
+                    keysPressed += event.target.id;
                     addCrumb();
                 });
                 $(".three").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression += event.target.id;
+                    breadcrumb += event.target.id;
+                    keysPressed += event.target.id;
                     addCrumb();
                 });
                 $(".four").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression += event.target.id;
+                    breadcrumb += event.target.id;
+                    keysPressed += event.target.id;
                     addCrumb();
                 });
                 $(".five").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression += event.target.id;
+                    breadcrumb += event.target.id;
+                    keysPressed += event.target.id;
                     addCrumb();
                 });
                 $(".six").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression += event.target.id;
+                    breadcrumb += event.target.id;
+                    keysPressed += event.target.id;
                     addCrumb();
                 });
                 $(".seven").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression += event.target.id;
+                    breadcrumb += event.target.id;
+                    keysPressed += event.target.id;
                     addCrumb();
                 });
                 $(".eight").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression += event.target.id;
+                    breadcrumb += event.target.id;
+                    keysPressed += event.target.id;
                     addCrumb();
                 });
                 $(".nine").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression += event.target.id;
+                    breadcrumb += event.target.id;
+                    keysPressed += event.target.id;
                     addCrumb();
                 });
-                $(".percent").click(function() {
+                $(".neg").click(function() {
                     console.log(event.target.id);
-                    expression = expression + event.target.id;
-                    breadcrumb = breadcrumb + event.target.id;
+                    expression += event.target.id;
+                    breadcrumb += event.target.id;
+                    keysPressed += event.target.id;
                     addCrumb();
                 });
                 $(".zero").click(function() {
-                    console.log($(this).text());
-                    expression = expression + $(this).text();
-                    breadcrumb = breadcrumb + $(this).text();
+                    console.log(event.target.id);
+                    expression += event.target.id;
+                    breadcrumb += event.target.id;
+                    keysPressed += event.target.id;
                     addCrumb();
                 });
                 $(".period").click(function() {
-                    console.log(event.target.id);
-                    expression = expression + event.target.id;
-                    breadcrumb = breadcrumb + event.target.id;
-                    addCrumb();
+                    if (!/\./.test(keysPressed[keysPressed.length-1])) {
+                        console.log(event.target.id);
+                        expression += event.target.id;
+                        breadcrumb += event.target.id;
+                        keysPressed += event.target.id;
+                        addCrumb();
+                    }
                 });
                 $(".divide").click(function() {
-                    console.log(event.target.id);
-                    expression = expression + event.target.id;
-                    breadcrumb = breadcrumb + event.target.id;
-                    addCrumb();
+                    if (!/[\/\+\-\*]/.test(keysPressed[keysPressed.length-1])) {
+                        console.log(event.target.id);
+                        expression += event.target.id;
+                        breadcrumb += event.target.id;
+                        keysPressed += event.target.id;
+                        addCrumb();
+                    }
                 });
                 $(".minus").click(function() {
-                    console.log(event.target.id);
-                    expression = expression + event.target.id;
-                    breadcrumb = breadcrumb + event.target.id;
-                    addCrumb();
+                    if (!/[\/\+\-\*]/.test(keysPressed[keysPressed.length-1])) {
+                        console.log(event.target.id);
+                        expression += event.target.id;
+                        breadcrumb += event.target.id;
+                        keysPressed += event.target.id;
+                        addCrumb();
+                    }
                 });
                 $(".plus").click(function() {
-                    console.log(event.target.id);
-                    expression = expression + event.target.id;
-                    breadcrumb = breadcrumb + event.target.id;
-                    addCrumb();
+                    if (!/[\/\+\-\*]/.test(keysPressed[keysPressed.length-1])) {
+                        console.log(event.target.id);
+                        expression += event.target.id;
+                        breadcrumb += event.target.id;
+                        keysPressed += event.target.id;
+                        addCrumb();
+                    }
                 });
                 $(".times").click(function() {
-                    console.log(event.target.id);
-                    expression = expression + event.target.id;
-                    breadcrumb = breadcrumb + event.target.id;
-                    addCrumb();
+                    if (!/[\/\+\-\*]/.test(keysPressed[keysPressed.length-1])) {
+                        console.log(event.target.id);
+                        expression += event.target.id;
+                        breadcrumb += event.target.id;
+                        keysPressed += event.target.id;
+                        addCrumb();
+                    }
                 });
                 
                 // evaluate expression
                 $(".evaluate").click(function(e) {
-
+                    
                     if (expression) { // equal button does nothing if no buttons have been clicked
                                 
                         var newResult = "";
