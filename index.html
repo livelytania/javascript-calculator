@@ -106,99 +106,115 @@
                     console.log("1");
                     expression = expression + "1";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 two.onclick = function() {
                     id = this.id;
                     console.log("2");
                     expression = expression + "2";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 three.onclick = function() {
                     id = this.id;
                     console.log("3");
                     expression = expression + "3";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 four.onclick = function() {
                     id = this.id;
                     console.log("4");
                     expression = expression + "4";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 five.onclick = function() {
                     id = this.id;
                     console.log("5");
                     expression = expression + "5";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 six.onclick = function() {
                     id = this.id;
                     console.log("6");
                     expression = expression + "6";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 seven.onclick = function() {
                     id = this.id;
                     console.log("7");
                     expression = expression + "7";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 eight.onclick = function() {
                     id = this.id;
                     console.log("8");
                     expression = expression + "8";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 nine.onclick = function() {
                     id = this.id;
                     console.log("9");
                     expression = expression + "9";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 percent.onclick = function() {
                     id = this.id;
                     console.log("%");
                     expression = expression + "%";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 zero.onclick = function() {
                     id = this.id;
                     console.log("0");
                     expression = expression + "0";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 period.onclick = function() {
                     id = this.id;
                     console.log(".");
                     expression = expression + ".";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 divide.onclick = function() {
                     id = this.id;
                     console.log("/");
                     expression = expression + "/";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 minus.onclick = function() {
                     id = this.id;
                     console.log("-");
                     expression = expression + "-";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 plus.onclick = function() {
                     id = this.id;
                     console.log("+");
                     expression = expression + "+";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 times.onclick = function() {
                     id = this.id;
                     console.log("*");
                     expression = expression + "*";
                     addCrumb(id);
+                    styleCrumb();
                 };
                 
-                // breadcrumbs
+                // add breadcrumbs
                 function addCrumb(id) {
                     var breadcrumbs = expression.split("");
                     console.log("addCrumb");
@@ -209,6 +225,13 @@
                     }
                     console.log(html);
                     breadcrumbsEl.innerHTML = html;
+                }
+                
+                // style breadcrumbs
+                function styleCrumb() {
+                    if (expression.length <= 3) {
+                        $(".crumb").wrapAll("<div class='crumb-wrapper first-order'></div>");
+                    }
                 }
                 
                 // evaluate expression
@@ -223,6 +246,7 @@
                     console.log("clear");
                     expression = "";
                     result.innerHTML = "";
+                    breadcrumbsEl.innerHTML = "";
                 }
 
             }

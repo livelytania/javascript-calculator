@@ -16,6 +16,10 @@ body, h1, h2, h3, p, a {
     margin: 0;
 }
 
+a, p.button {
+    cursor: pointer;
+}
+
 /*--------------------------
 Phone
 ----------------------------*/
@@ -85,6 +89,8 @@ Layout
 Calculator
 ----------------------------*/
 
+/* display */
+
 .result-container {
     align-items: flex-end;
     display: flex;
@@ -96,7 +102,37 @@ Calculator
     color: #170808;
     font-size: 92px;
     margin: 0 24px 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
 }
+
+/* breadcrumbs */
+
+.crumb-wrapper {
+    align-items: center;
+    border-radius: 12px;
+    color: #fff; /* #4c4c4c */
+    display: flex;
+    height: 24px;
+    margin: 0 8px 0 8px;
+    padding: 0 6px 0 6px;
+}
+
+.first-order {
+    background-color: #68cef2;
+}
+
+.second-order {
+    background-color: #fdaf64;
+}
+
+.crumb {
+    font-size: 12px;
+    font-weight: normal;
+    padding: 0 2px 0 2px;
+}
+
+/* keypad */
 
 .keypad-button {
     align-items: center;
@@ -106,6 +142,8 @@ Calculator
     font-size: 22px;
     justify-content: center;
 }
+
+/* operators */
 
 .operator-button {
     align-items: center;
@@ -156,28 +194,4 @@ Calculator
 #evaluate {
     border: 2px solid #a4dbac;
     color: #a4dbac;
-}
-
-.crumb-wrapper {
-    align-items: center;
-    border-radius: 12px;
-    color: #fff; /* #4c4c4c */
-    display: flex;
-    height: 24px;
-    margin: 0 8px 0 8px;
-    padding: 0 6px 0 6px;
-}
-
-.first-order {
-    background-color: #68cef2;
-}
-
-.second-order {
-    background-color: #fdaf64;
-}
-
-.crumb {
-    font-size: 12px;
-    font-weight: normal;
-    padding: 0 2px 0 2px;
 }
