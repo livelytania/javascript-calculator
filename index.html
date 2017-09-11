@@ -155,11 +155,13 @@
                     addCrumb();
                 });
                 $(".neg").click(function() {
-                    console.log(event.target.id);
-                    expression += event.target.id;
-                    breadcrumb += event.target.id;
-                    keysPressed += event.target.id;
-                    addCrumb();
+                    if (!/\-/.test(keysPressed[keysPressed.length-1])) {
+                        console.log(event.target.id);
+                        expression += event.target.id;
+                        breadcrumb += event.target.id;
+                        keysPressed += event.target.id;
+                        addCrumb();
+                    }
                 });
                 $(".zero").click(function() {
                     console.log(event.target.id);
