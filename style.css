@@ -21,23 +21,18 @@ a, p {
 }
 
 /*--------------------------
-Phone
-----------------------------*/
-
-.container {
-    margin: 20px auto;
-}
-
-/*--------------------------
 Layout
 ----------------------------*/
+
+.iphone6 {
+    display: block;
+    margin: 3vw auto;
+}
     
 .calc-container {
-    background-color: #f4f4f4;
-    border-radius: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 225px 50px 275px 83px 84px;
+    grid-template-rows: 175px 50px 275px 83px 84px;
     grid-template-areas:
         "display display display display"
         "breadcrumbs breadcrumbs breadcrumbs breadcrumbs"
@@ -45,7 +40,6 @@ Layout
         "operators operators operators operators"
         "back-eval back-eval back-eval back-eval";
     margin: 0 auto;
-    padding: 40px 12px 60px 12px;
     width: 375px;
 }
 
@@ -101,9 +95,9 @@ Calculator
 .result {
     color: #170808;
     font-size: 92px;
-    height: 120px;
     margin: 0 24px 10px 0;
     overflow: hidden;
+    vertical-align: bottom;
     white-space: nowrap;
 }
 

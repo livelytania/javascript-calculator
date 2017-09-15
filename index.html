@@ -12,47 +12,65 @@
         <script src="https://use.fontawesome.com/780ce05cc4.js"></script>
         
         <!-- Styles -->
+        <link rel="stylesheet" href="devices.min.css">
         <link rel="stylesheet" href="style.css">
         
     </head>
     
     <body>
-        
         <div class="container">
-            <div class="calc-container">
-                <div class="display">
-                    <div class="result-container"><p class="result">0</p></div>
-                </div>
-                <div class="breadcrumbs">
-                    <div class="crumb-wrapper crumb-wrapper-0">
+            <div class="marvel-device iphone6 gold">
+                <div class="top-bar"></div>
+                <div class="sleep"></div>
+                <div class="volume"></div>
+                <div class="camera"></div>
+                <div class="sensor"></div>
+                <div class="speaker"></div>
+                <div class="screen">
+
+                    <div class="calc-container">
+                        <div class="display">
+                            <div class="result-container">
+                                <p class="result">0</p>
+                            </div>
+                        </div>
+                        <div class="breadcrumbs">
+                            <div class="crumb-wrapper crumb-wrapper-0">
+                            </div>
+                        </div>
+                        <div class="keypad">
+                            <p class="keypad-button" id="1">1</p>
+                            <p class="keypad-button" id="2">2</p>
+                            <p class="keypad-button" id="3">3</p>
+                            <p class="keypad-button" id="4">4</p>
+                            <p class="keypad-button" id="5">5</p>
+                            <p class="keypad-button" id="6">6</p>
+                            <p class="keypad-button" id="7">7</p>
+                            <p class="keypad-button" id="8">8</p>
+                            <p class="keypad-button" id="9">9</p>
+                            <p class="keypad-button neg" id="-">&mnplus;</p>
+                            <p class="keypad-button" id="0">0</p>
+                            <p class="keypad-button period" id=".">&period;</p>
+                        </div>
+                        <div class="operators">
+                            <p class="operator-button divide" id="/">&div;</p>
+                            <p class="operator-button minus" id="-">&minus;</p>
+                            <p class="operator-button plus" id="+">&plus;</p>
+                            <p class="operator-button times" id="*">&times;</p>
+                        </div>
+                        <div class="back-eval">
+                            <p class="back-eval-button back" id="back">&lt; Back</p>
+                            <p class="back-eval-button eval" id="=">&equals;</p>
+                        </div>
                     </div>
+
                 </div>
-                <div class="keypad">
-                    <p class="keypad-button" id="1">1</p>
-                    <p class="keypad-button" id="2">2</p>
-                    <p class="keypad-button" id="3">3</p>
-                    <p class="keypad-button" id="4">4</p>
-                    <p class="keypad-button" id="5">5</p>
-                    <p class="keypad-button" id="6">6</p>
-                    <p class="keypad-button" id="7">7</p>
-                    <p class="keypad-button" id="8">8</p>
-                    <p class="keypad-button" id="9">9</p>
-                    <p class="keypad-button neg" id="-">&mnplus;</p>
-                    <p class="keypad-button" id="0">0</p>
-                    <p class="keypad-button period" id=".">&period;</p>
-                </div>
-                <div class="operators">
-                    <p class="operator-button divide" id="/">&div;</p>
-                    <p class="operator-button minus" id="-">&minus;</p>
-                    <p class="operator-button plus" id="+">&plus;</p>
-                    <p class="operator-button times" id="*">&times;</p>
-                </div>
-                <div class="back-eval">
-                    <p class="back-eval-button back" id="back">&lt; Back</p>
-                    <p class="back-eval-button eval" id="=">&equals;</p>
-                </div>
+                <div class="home"></div>
+                <div class="bottom-bar"></div>
             </div>
-        </div>
+            <div>Calculator design by _____. CSS iPhone6 by ______.</div>
+        </div>       
+            
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         
@@ -129,6 +147,22 @@
                     }
                 });
                 
+                $('.result').bind("DOMSubtreeModified",function(){
+                    var str = $(".result").text();
+                    if (str.length < 6) {
+                        $(".result").css("font-size", "92px");
+                    }
+                    if (str.length > 6) {
+                        $(".result").css("font-size", "64px");
+                    }
+                    if (str.length > 8) {
+                        $(".result").css("font-size", "44px");
+                    }
+                    if (str.length > 10) {
+                        
+                    }
+                });
+                
                 // evaluate expression
                 $(".eval").click(function(e) {
                     
@@ -146,7 +180,7 @@
                         newResult = eval(lastResult + expression);
 
                         $(".result").empty().html(newResult);
-
+                        
                         console.log("RESULT: " + newResult);
 
                         // reset variables
@@ -209,6 +243,16 @@
                     }
                     
                 });
+                
+                // font size
+                function adjustFontSize(str) {
+                    if (str.length > 6) {
+                        $(".result").css("font-size", "74px");
+                    }
+                    if (str.length > 9) {
+                        $(".result").css("font-size", "74px");
+                    }
+                }
 
             });
             
