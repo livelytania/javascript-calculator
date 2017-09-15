@@ -30,8 +30,8 @@
 
                     <div class="calc-container">
                         <div class="display">
-                            <div class="result-container">
-                                <p class="result">0</p>
+                            <div class="result-container" id="bigtext">
+                                <div class="result">0</div>
                             </div>
                         </div>
                         <div class="breadcrumbs">
@@ -71,8 +71,11 @@
             <div>Calculator design by _____. CSS iPhone6 by ______.</div>
         </div>       
             
-        
+        <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+        <!-- BigText -->
+        <script src="script.js" type="text/javascript"></script>
         
         <script type="text/javascript">
             
@@ -244,15 +247,17 @@
                     
                 });
                 
-                // font size
-                function adjustFontSize(str) {
-                    if (str.length > 6) {
-                        $(".result").css("font-size", "74px");
-                    }
-                    if (str.length > 9) {
-                        $(".result").css("font-size", "74px");
-                    }
-                }
+                $("#bigtext").bigtext();
+                
+//                // font size
+//                function adjustFontSize(str) {
+//                    if (str.length > 6) {
+//                        $(".result").css("font-size", "74px");
+//                    }
+//                    if (str.length > 9) {
+//                        $(".result").css("font-size", "74px");
+//                    }
+//                }
 
             });
             
