@@ -80,6 +80,18 @@ Layout
 }
 
 /*--------------------------
+Fix to work with devices.min.css
+----------------------------*/
+
+.marvel-device {
+    pointer-events: none;
+}
+
+.calc-container {
+    pointer-events: auto;
+}
+
+/*--------------------------
 Calculator
 ----------------------------*/
 
