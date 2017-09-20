@@ -113,6 +113,13 @@ Calculator
     white-space: nowrap;
 }
 
+.error-message {
+    bottom: 120px;
+    color: #21a4d3;
+    left: 304px;
+    position: relative;
+}
+
 /* breadcrumbs */
 
 .crumb-wrapper {

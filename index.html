@@ -30,7 +30,8 @@
 
                     <div class="calc-container">
                         <div class="display">
-                            <div class="result-container" id="bigtext">
+                            <div class="result-container">
+                                <div class="error-message"></div>
                                 <div class="result">0</div>
                             </div>
                         </div>
@@ -74,9 +75,6 @@
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         
-        <!-- BigText -->
-        <script src="bigtext.js" type="text/javascript"></script>
-        
         <script type="text/javascript">
             
             // initialize variables
@@ -89,12 +87,10 @@
             // function to add breadcrumbs
             function addCrumb() {
                 $(".crumb-wrapper-" + equalClicks).css("display", "flex");
-                console.log("add breadcrumb: " + breadcrumb);
                 var html = "";
                 for (i=0; i<breadcrumb.length; i++) {
                     html = html + "<div class='crumb'>" + breadcrumb[i] + "</div>"
                 }
-                console.log(html);
                 $(".crumb-wrapper-" + equalClicks).html(html);
             }
             
@@ -102,18 +98,14 @@
             function lastThing(keysPressed) {
                 var re = /[\/\+\-\*]/;
                 var array = keysPressed.split(re);
-                console.log(array);
             }
             
             // Main script
             
             $(document).ready(function() {
                 
-                console.log("Equal button clicks: " + equalClicks);
-                
                 // update expression on click
                 $(".keypad-button").click(function() {
-                    console.log(event.target.id);
                     expression += event.target.id;
                     breadcrumb += event.target.id;
                     keysPressed += event.target.id;
@@ -122,7 +114,6 @@
                 
                 $(".neg").click(function() {
                     if (!/\-/.test(keysPressed[keysPressed.length-1])) {
-                        console.log(event.target.id);
                         expression += event.target.id;
                         breadcrumb += event.target.id;
                         keysPressed += event.target.id;
@@ -132,7 +123,6 @@
                 
                 $(".period").click(function() {
                     if (!/\./.test(keysPressed[keysPressed.length-1])) {
-                        console.log(event.target.id);
                         expression += event.target.id;
                         breadcrumb += event.target.id;
                         keysPressed += event.target.id;
@@ -142,7 +132,6 @@
                 
                 $(".operator-button").click(function() {
                     if (!/[\/\+\-\*]/.test(keysPressed[keysPressed.length-1])) {
-                        console.log(event.target.id);
                         expression += event.target.id;
                         breadcrumb += event.target.id;
                         keysPressed += event.target.id;
@@ -150,21 +139,24 @@
                     }
                 });
                 
-//                $('.result').bind("DOMSubtreeModified",function(){
-//                    var str = $(".result").text();
-//                    if (str.length < 6) {
-//                        $(".result").css("font-size", "92px");
-//                    }
-//                    if (str.length > 6) {
-//                        $(".result").css("font-size", "64px");
-//                    }
-//                    if (str.length > 8) {
-//                        $(".result").css("font-size", "44px");
-//                    }
-//                    if (str.length > 10) {
-//                        
-//                    }
-//                });
+                $('.result').bind("DOMSubtreeModified",function(){
+                    var str = $(".result").text();
+                    if (str.length < 6) {
+                        $(".result").css("font-size", "92px");
+                    }
+                    if (str.length == 7) {
+                        $(".result").css("font-size", "82px");
+                    }
+                    if (str.length == 8) {
+                        $(".result").css("font-size", "72px");
+                    }
+                    if (str.length == 9) {
+                        $(".result").css("font-size", "62px");
+                    }
+                    if (str.length == 10) {
+                        $(".result").css("font-size", "56px");
+                    }
+                });
                 
                 // evaluate expression
                 $(".eval").click(function(e) {
@@ -175,16 +167,17 @@
                         var lastResult = resultLog[resultLog.length-1];
 
                         // evaluate the expression and display it
-                        console.log("Evaluating...");
-                        console.log(" last result: " + lastResult);
-                        console.log(" new expression: " + expression);
-                        console.log(" combine: " + lastResult + expression);
-
+                        
                         newResult = eval(lastResult + expression);
+                        
+                        if (newResult.toString().length > 10) {
+                            newResult = newResult.toString().split("");
+                            newResult.splice(6,newResult.length-6);
+                            newResult = newResult.join("");
+                            $(".error-message").html("truncated result");
+                            }
 
                         $(".result").empty().html(newResult);
-                        
-                        console.log("RESULT: " + newResult);
 
                         // reset variables
                         expression = "";
@@ -195,7 +188,6 @@
 
                         // increment the number of equal clicks by one
                         equalClicks++;
-                        console.log("Equal button clicks: " + equalClicks);
 
                         // add new breadcrumb div to accept the next breadcrumb
                         $(".breadcrumbs").append("<div class='crumb-wrapper crumb-wrapper-" + equalClicks + "'></div>"); 
@@ -215,8 +207,6 @@
                             // decrement the number of equal clicks by 1
                             equalClicks--;
                         }
-
-                        console.log($(".crumb-wrapper-" + equalClicks));
 
                         // remove the most recent breadcrumb
                         $(".crumb-wrapper-" + equalClicks).remove();
@@ -238,16 +228,10 @@
                         // add new breadcrumb div to accept the next breadcrumb
                         $(".breadcrumbs").append("<div class='crumb-wrapper crumb-wrapper-" + equalClicks + "'></div>"); 
                         $(".crumb-wrapper-" + equalClicks).css({"display":"none", "background-color":"#68cef2"});
-
-                        console.log("You have moved back one step");
-                        console.log("Equal clicks have been reset to " + equalClicks);
-                        console.log("The result has been reset to: " + resetResult);
                 
                     }
                     
                 });
-                
-                $("#bigtext").bigtext();
                 
 //                // font size
 //                function adjustFontSize(str) {
